@@ -16,7 +16,7 @@ Then, add it to your `gulpfile.js`:
 var ejs = require("gulp-ejs");
 
 gulp.src("./templates/*.ejs")
-	.pipe(ejs({
+	.pipe(ejs.render({
 		msg: "Hello Gulp!"
 	}))
 	.pipe(gulp.dest("./dist"));
@@ -29,7 +29,7 @@ var ejs = require('gulp-ejs');
 var gutil = require('gulp-util');
 
 gulp.src('./templates/*.ejs')
-	.pipe(ejs({
+	.pipe(ejs.render({
 		msg: 'Hello Gulp!'
 	}).on('error', gutil.log))
 	.pipe(gulp.dest('./dist'));
@@ -38,7 +38,7 @@ This will make gulp log the error and continue normal execution.
 
 ## API
 
-### ejs(options, settings)
+### ejs.render(options, settings)
 
 #### options
 Type: `hash`

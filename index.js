@@ -4,7 +4,7 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var ejs = require('ejs');
 
-module.exports = function (options, settings) {
+function run(options, settings, compile) {
     options = options || {};
     settings = settings || {};
 
@@ -23,10 +23,13 @@ module.exports = function (options, settings) {
 
         options = file.data || options;
         options.filename = file.path;
+        // if (compile && options.client)
 
         try {
             file.contents = new Buffer(
-                ejs.render(file.contents.toString(), options)
+                (compile ?
+                    ejs.compile(file.contents.toString(), options).toString() :
+                    ejs.render(file.contents.toString(), options))
             );
 
             if (typeof settings.ext !== 'undefined') {
@@ -40,3 +43,14 @@ module.exports = function (options, settings) {
         cb();
     });
 };
+
+module.exports = {
+    render: function (options, settings) {
+        return run(options, settings);
+    },
+    compile: function (options, settings) {
+        return run(options, settings, true);
+    }
+};
+
+

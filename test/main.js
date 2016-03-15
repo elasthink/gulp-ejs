@@ -34,7 +34,7 @@ describe('gulp-ejs', function () {
             contents: fs.readFileSync('test/fixtures/ok.ejs')
         });
 
-        var stream = ejs({ title: 'gulp-ejs' });
+        var stream = ejs.render({ title: 'gulp-ejs' });
 
         stream.on('error', function (err) {
             should.exist(err);
@@ -65,7 +65,7 @@ describe('gulp-ejs', function () {
             contents: fs.readFileSync('test/fixtures/nok.ejs')
         });
 
-        var stream = ejs({ title: 'gulp-ejs' });
+        var stream = ejs.render({ title: 'gulp-ejs' });
 
         stream.on('error', function (err) {
             should.exist(err);
@@ -85,7 +85,7 @@ describe('gulp-ejs', function () {
       contents: fs.readFileSync('test/fixtures/ok.ejs')
     });
 
-    var stream = ejs({ title: 'gulp-ejs' }, {ext:'.txt'});
+    var stream = ejs.render({ title: 'gulp-ejs' }, {ext:'.txt'});
 
     stream.on('error', function (err) {
       should.exist(err);
@@ -116,7 +116,7 @@ describe('gulp-ejs', function () {
       contents: fs.readFileSync('test/fixtures/withpartial.ejs')
     });
 
-    var stream = ejs({ title: 'gulp-ejs', msg: 'gulp-ejs', name: 'rpvl' });
+    var stream = ejs.render({ title: 'gulp-ejs', msg: 'gulp-ejs', name: 'rpvl' });
 
     stream.on('data', function (newFile) {
 
@@ -146,7 +146,7 @@ describe('gulp-ejs', function () {
       contents: new Buffer('<%- filename -%>')
     });
 
-    var stream = ejs();
+    var stream = ejs.render();
 
     stream.on('data', function (newFile) {
       newFile.contents.toString().should.equal(newFile.path);
@@ -171,7 +171,7 @@ describe('gulp-ejs', function () {
       // simulate gulp-data plugin
       srcFile.data = { title: 'gulp-ejs' };
 
-      var stream = ejs();
+      var stream = ejs.render();
 
       stream.on('error', function (err) {
           should.exist(err);
@@ -202,7 +202,7 @@ describe('gulp-ejs', function () {
         contents: fs.readFileSync('test/fixtures/config.js.ejs')
       });
 
-      var stream = ejs({
+      var stream = ejs.render({
         baseUrl: 'https://github.com/rogeriopvl/gulp-ejs',
         FacebookApiToken: function () {
           return '0e24aa7fa3d7acffdb2085cec5ab0ce704f48318';
@@ -233,7 +233,7 @@ describe('gulp-ejs', function () {
         contents: fs.readFileSync('test/fixtures/head.css.ejs')
       });
 
-      var stream = ejs({
+      var stream = ejs.render({
         fonts_path: function () {
           return '../fonts/fontawesome-webfont.eot?v=4.1.0';
         }
