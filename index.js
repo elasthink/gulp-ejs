@@ -23,7 +23,6 @@ function run(options, settings, compile) {
 
         options = file.data || options;
         options.filename = file.path;
-        // if (compile && options.client)
 
         try {
             file.contents = new Buffer(
